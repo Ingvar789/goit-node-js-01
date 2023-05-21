@@ -17,14 +17,16 @@ async function getContactById(contactId) {
 
 async function removeContact(contactId) {
   const allContacts = await listContacts();
-  const contactToRemove = allContacts.find((item) => item.id === contactId);
+  const contactToRemove = allContacts.findIndex(
+    (item) => item.id === contactId
+  );
   console.log(contactToRemove);
   if (contactToRemove === undefined) {
-    return null;
+    return `Contact with id ${contactId} is not existing!`;
   }
-  const [result] = allContacts.splice(contactToRemove, 1);
+  allContacts.splice(contactToRemove, 1);
   await fs.writeFile(contactsPath, JSON.stringify(allContacts, null, 2));
-  return result;
+  return `Contact with id ${contactId} was succesfully deleted!`;
 }
 
 async function addContact(name, email, phone) {
