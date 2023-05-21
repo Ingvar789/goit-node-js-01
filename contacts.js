@@ -20,8 +20,7 @@ async function removeContact(contactId) {
   const contactToRemove = allContacts.findIndex(
     (item) => item.id === contactId
   );
-  console.log(contactToRemove);
-  if (contactToRemove === undefined) {
+  if (contactToRemove === -1) {
     return `Contact with id ${contactId} is not existing!`;
   }
   allContacts.splice(contactToRemove, 1);
